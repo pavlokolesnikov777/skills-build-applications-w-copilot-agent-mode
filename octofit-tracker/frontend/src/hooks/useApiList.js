@@ -3,9 +3,10 @@ import { fetchList } from '../api';
 
 /**
  * Loads a list resource from the API and tracks loading/error state.
- * @param {string} path Full endpoint path, e.g. `/api/activities/`.
+ * @param {string} url Full absolute endpoint URL, e.g.
+ *   `https://<codespace>-8000.app.github.dev/api/activities/`.
  */
-export default function useApiList(path) {
+export default function useApiList(url) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +17,7 @@ export default function useApiList(path) {
     setLoading(true);
     setError(null);
 
-    fetchList(path)
+    fetchList(url)
       .then((data) => {
         if (!cancelled) {
           setItems(data);
@@ -36,7 +37,7 @@ export default function useApiList(path) {
     return () => {
       cancelled = true;
     };
-  }, [path]);
+  }, [url]);
 
   return { items, loading, error };
 }

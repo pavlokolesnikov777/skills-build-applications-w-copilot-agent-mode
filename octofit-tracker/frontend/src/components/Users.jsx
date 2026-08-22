@@ -1,7 +1,14 @@
 import useApiList from '../hooks/useApiList';
 
+// VITE_CODESPACE_NAME must be defined (e.g. in .env.local); falls back to
+// localhost so the app never requests https://undefined-8000...
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const USERS_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/users/`
+  : 'http://localhost:8000/api/users/';
+
 export default function Users() {
-  const { items, loading, error } = useApiList('/api/users/');
+  const { items, loading, error } = useApiList(USERS_API_URL);
 
   if (loading) return <p>Loading users…</p>;
   if (error) return <p className="text-danger">Error loading users: {error}</p>;

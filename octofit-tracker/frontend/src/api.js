@@ -11,12 +11,13 @@ export const API_BASE_URL = codespaceName
 /**
  * Fetch a list resource from the API, handling both plain array responses
  * and paginated responses (e.g. `{ results: [...] }` or `{ data: [...] }`).
- * @param {string} path Full endpoint path, e.g. `/api/activities/`.
+ * @param {string} url Full absolute endpoint URL, e.g.
+ *   `https://<codespace>-8000.app.github.dev/api/activities/`.
  */
-export async function fetchList(path) {
-  const response = await fetch(`${API_BASE_URL}${path}`);
+export async function fetchList(url) {
+  const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${path}: ${response.status}`);
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
   }
   const payload = await response.json();
 

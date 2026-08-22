@@ -1,5 +1,12 @@
 import useApiList from '../hooks/useApiList';
 
+// VITE_CODESPACE_NAME must be defined (e.g. in .env.local); falls back to
+// localhost so the app never requests https://undefined-8000...
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const TEAMS_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/teams/`
+  : 'http://localhost:8000/api/teams/';
+
 function memberNames(members) {
   if (!Array.isArray(members) || members.length === 0) return '—';
   return members
@@ -8,7 +15,7 @@ function memberNames(members) {
 }
 
 export default function Teams() {
-  const { items, loading, error } = useApiList('/api/teams/');
+  const { items, loading, error } = useApiList(TEAMS_API_URL);
 
   if (loading) return <p>Loading teams…</p>;
   if (error) return <p className="text-danger">Error loading teams: {error}</p>;

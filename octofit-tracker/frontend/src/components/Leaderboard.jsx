@@ -1,5 +1,12 @@
 import useApiList from '../hooks/useApiList';
 
+// VITE_CODESPACE_NAME must be defined (e.g. in .env.local); falls back to
+// localhost so the app never requests https://undefined-8000...
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const LEADERBOARD_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/';
+
 function displayUser(user) {
   if (!user) return '—';
   if (typeof user === 'string') return user;
@@ -7,7 +14,7 @@ function displayUser(user) {
 }
 
 export default function Leaderboard() {
-  const { items, loading, error } = useApiList('/api/leaderboard/');
+  const { items, loading, error } = useApiList(LEADERBOARD_API_URL);
 
   if (loading) return <p>Loading leaderboard…</p>;
   if (error) return <p className="text-danger">Error loading leaderboard: {error}</p>;
