@@ -7,7 +7,7 @@ function displayUser(user) {
 }
 
 export default function Activities() {
-  const { items, loading, error } = useApiList('activities');
+  const { items, loading, error } = useApiList('/api/activities/');
 
   if (loading) return <p>Loading activities…</p>;
   if (error) return <p className="text-danger">Error loading activities: {error}</p>;

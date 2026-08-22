@@ -8,7 +8,7 @@ function memberNames(members) {
 }
 
 export default function Teams() {
-  const { items, loading, error } = useApiList('teams');
+  const { items, loading, error } = useApiList('/api/teams/');
 
   if (loading) return <p>Loading teams…</p>;
   if (error) return <p className="text-danger">Error loading teams: {error}</p>;

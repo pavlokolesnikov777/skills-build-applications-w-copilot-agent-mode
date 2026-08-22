@@ -1,7 +1,7 @@
 import useApiList from '../hooks/useApiList';
 
 export default function Users() {
-  const { items, loading, error } = useApiList('users');
+  const { items, loading, error } = useApiList('/api/users/');
 
   if (loading) return <p>Loading users…</p>;
   if (error) return <p className="text-danger">Error loading users: {error}</p>;

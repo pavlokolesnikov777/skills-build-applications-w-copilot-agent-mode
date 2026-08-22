@@ -1,7 +1,7 @@
 import useApiList from '../hooks/useApiList';
 
 export default function Workouts() {
-  const { items, loading, error } = useApiList('workouts');
+  const { items, loading, error } = useApiList('/api/workouts/');
 
   if (loading) return <p>Loading workouts…</p>;
   if (error) return <p className="text-danger">Error loading workouts: {error}</p>;

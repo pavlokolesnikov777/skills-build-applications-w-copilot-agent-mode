@@ -3,8 +3,9 @@ import { fetchList } from '../api';
 
 /**
  * Loads a list resource from the API and tracks loading/error state.
+ * @param {string} path Full endpoint path, e.g. `/api/activities/`.
  */
-export default function useApiList(resource) {
+export default function useApiList(path) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +16,7 @@ export default function useApiList(resource) {
     setLoading(true);
     setError(null);
 
-    fetchList(resource)
+    fetchList(path)
       .then((data) => {
         if (!cancelled) {
           setItems(data);
@@ -35,7 +36,7 @@ export default function useApiList(resource) {
     return () => {
       cancelled = true;
     };
-  }, [resource]);
+  }, [path]);
 
   return { items, loading, error };
 }

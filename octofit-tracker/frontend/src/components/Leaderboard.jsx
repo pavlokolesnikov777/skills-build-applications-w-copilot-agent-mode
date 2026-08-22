@@ -7,7 +7,7 @@ function displayUser(user) {
 }
 
 export default function Leaderboard() {
-  const { items, loading, error } = useApiList('leaderboard');
+  const { items, loading, error } = useApiList('/api/leaderboard/');
 
   if (loading) return <p>Loading leaderboard…</p>;
   if (error) return <p className="text-danger">Error loading leaderboard: {error}</p>;
