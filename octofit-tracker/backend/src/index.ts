@@ -3,7 +3,7 @@ import './config/database';
 import apiRouter from './routes/api';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000; //already in place
 const codespaceName = process.env.CODESPACE_NAME;
 const apiBaseUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : `http://localhost:${PORT}`;
 
